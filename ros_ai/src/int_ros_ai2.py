@@ -18,6 +18,12 @@ import json
 import numpy as np
 import cv2
 
+
+#For Deleting Images
+import os
+import glob
+
+#done for testing some ros msgs
 from ros_ai.msg import gait_parameters
 
 class integration:
@@ -25,6 +31,20 @@ class integration:
     def __init__(self):
 
         print('inside init')
+        print('Deleting previous Images')
+        # Deleting Images Stored @ /home/xavor/SiamRPN_Tracking_API/Data/Input/Image/
+
+        home_path = os.path.expanduser('~')
+        working_dir = home_path + '/SiamRPN_Tracking_API/Data/Input/Image/*'
+        #print working_dir
+        files = glob.glob(working_dir)
+
+        for f in files:
+            os.remove(f)
+
+        print('Deleted all files')
+
+
         self.bridge = CvBridge()
 
         self.addr = 'http://10.21.8.22:5000'
@@ -119,6 +139,7 @@ class integration:
                     np.save(f, self.xyz_image)
 
                 demo = True
+                
                 self.data = {'image': image_path, 'point_cloud': point_cloud_path, 're_initialize': False, 'demo': demo} 
                 if not count: 
                     self.data = {'image': image_path, 'point_cloud': point_cloud_path, 're_initialize': True, 'demo': demo}
