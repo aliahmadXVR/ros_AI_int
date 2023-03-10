@@ -58,6 +58,9 @@ class face_reg_integration:
         while  not rospy.is_shutdown():
             if self.cv_image is not None:
                 self.cv_image = cv2.resize(self.cv_image, (640,480) , interpolation = cv2.INTER_AREA)
+                # cv2.imshow("Image window", self.cv_image)
+                # cv2.waitKey(1)
+
                 string_img = base64.binascii.b2a_base64(self.cv_image).decode("ascii")
                 data = {'img': string_img, 'frame_dict': self.frame_dict, 'saved_count': self.saved_count, 'username': self.username}
 
@@ -74,7 +77,7 @@ class face_reg_integration:
                 self.feedback_pub.publish(status_msg)
                 
                 if(saved_count == 9):
-                    rospy.signal_shutdown("Killing node")
+                    rospy.signal_shutdown("All images saved")
                
             
 # -----------------------------------------
