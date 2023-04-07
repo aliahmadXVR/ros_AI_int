@@ -11,3 +11,9 @@ Use the following instructions to launch the model and respective ROS node.
 3. In the end, launch the client ROS node   
 `rosrun ros_ai int_ros_ai2.py`
 
+# Launching the Facial Registration and Recoognition
+To be added soon with new implementation of BT.
+
+# Launhing the Gait Model
+To be added soon with new implementation of BT.
+
